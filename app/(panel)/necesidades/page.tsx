@@ -25,7 +25,7 @@ function puedeCambiarEstadoFila(
   miCentroId: string | null,
   centrosCobertura: { id: string }[],
 ) {
-  if (rol === "operador" || rol === "delivery") return true;
+  if (rol === "operador" || rol === "voluntario") return true;
   if (rol === "jefe_centro" || rol === "logistica") {
     return Boolean(miCentroId) && centrosCobertura.some((c) => c.id === miCentroId);
   }

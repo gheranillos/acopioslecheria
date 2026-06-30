@@ -9,7 +9,7 @@ from auth.users u
 left join public.perfiles p on p.id = u.id
 where lower(u.email) = lower('gherardgon@gmail.com');
 
--- 2) Si la fila de arriba muestra rol = 'delivery', ejecuta esto:
+-- 2) Si la fila de arriba muestra rol = 'voluntario', ejecuta esto:
 update public.perfiles p
 set
   rol = 'operador',

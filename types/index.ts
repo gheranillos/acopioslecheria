@@ -51,7 +51,7 @@ export const ROLES_USUARIO = [
   { value: "operador", label: "Operador" },
   { value: "jefe_centro", label: "Jefe de centro de acopio" },
   { value: "logistica", label: "Encargado de logística" },
-  { value: "delivery", label: "Delivery" },
+  { value: "voluntario", label: "Voluntario" },
 ] as const;
 
 /** Centro de acopio con sus depósitos, inventario y zonas que cubre (para el panel del mapa). */

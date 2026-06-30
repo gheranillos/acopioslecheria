@@ -64,7 +64,7 @@ No se puede crear un usuario de `auth.users` por SQL de forma confiable. Pasos:
 
 1. Crea la cuenta desde la pantalla de login de la app, o desde el Dashboard de
    Supabase → Authentication → Add user (con el email de Gherard, el operador).
-2. El trigger `handle_new_user` le crea automáticamente un perfil con `rol = 'delivery'`.
+2. El trigger `handle_new_user` le crea automáticamente un perfil con `rol = 'voluntario'`.
 3. Sube su rol a operador ejecutando en el SQL Editor:
 
    ```sql
@@ -92,7 +92,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 | Operador | Acceso total: todas las entidades, gestión de usuarios y roles, ve todos los centros |
 | Jefe de centro de acopio | CRUD completo sobre su propio centro: inventario, zonas cubiertas, necesidades |
 | Encargado de logística | Edita inventario y estado de necesidades de su centro; no elimina ni gestiona usuarios |
-| Delivery | Lectura del tablero de necesidades; puede actualizar su estado (en proceso / cubierta) |
+| Voluntario | Lectura del tablero de necesidades; puede actualizar su estado (en proceso / cubierta) |
 
 La aplicación de estos permisos es **doble**: la UI oculta lo que cada rol no puede
 hacer, pero la garantía real está en las políticas de Row Level Security definidas en

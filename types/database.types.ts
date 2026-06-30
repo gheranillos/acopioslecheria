@@ -28,7 +28,7 @@ export type RolUsuario =
   | "operador"
   | "jefe_centro"
   | "logistica"
-  | "delivery";
+  | "voluntario";
 
 export interface Database {
   public: {

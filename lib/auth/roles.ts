@@ -35,7 +35,7 @@ export function puedeEditarEstadoNecesidad(rol: RolUsuario) {
     rol === "operador" ||
     rol === "jefe_centro" ||
     rol === "logistica" ||
-    rol === "delivery"
+    rol === "voluntario"
   );
 }
 
@@ -44,12 +44,12 @@ export function puedeGestionarCobertura(rol: RolUsuario) {
 }
 
 export function esSoloLectura(rol: RolUsuario) {
-  return rol === "delivery";
+  return rol === "voluntario";
 }
 
 export const ETIQUETA_ROL: Record<RolUsuario, string> = {
   operador: "Operador",
   jefe_centro: "Jefe de centro de acopio",
   logistica: "Encargado de logística",
-  delivery: "Delivery",
+  voluntario: "Voluntario",
 };

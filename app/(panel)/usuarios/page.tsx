@@ -15,7 +15,7 @@ export default async function UsuariosPage() {
         <h1 className="text-xl font-semibold tracking-tight">Usuarios</h1>
         <p className="text-sm text-muted-foreground">
           Asigna rol y centro de acopio a cada cuenta registrada. Las cuentas nuevas
-          entran con rol &quot;Delivery&quot; por defecto.
+          entran con rol &quot;Voluntario&quot; por defecto.
         </p>
       </div>
 

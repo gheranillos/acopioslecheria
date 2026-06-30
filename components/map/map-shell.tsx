@@ -6,6 +6,7 @@ import { useState } from "react";
 import { LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { CentroPanel } from "./centro-panel";
 import { ZonaPanel } from "./zona-panel";
 import { MapLegend } from "./map-legend";
@@ -33,6 +34,7 @@ export function MapShell({
   perfiles: Perfil[];
   centroInicialId?: string;
 }) {
+  const isMobile = useIsMobile();
   const [seleccion, setSeleccion] = useState<Seleccion>(
     centroInicialId ? { tipo: "centro", id: centroInicialId } : null,
   );
@@ -90,7 +92,7 @@ export function MapShell({
 
       {/* Panel móvil: bottom sheet */}
       <Sheet
-        open={hayDetalle}
+        open={Boolean(hayDetalle && isMobile)}
         onOpenChange={(open) => {
           if (!open) setSeleccion(null);
         }}

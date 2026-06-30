@@ -83,7 +83,7 @@ $$;
 
 -- -----------------------------------------------------------------------------
 -- TRIGGER: crear perfil automáticamente al registrarse un usuario
--- Rol por defecto = 'delivery' (el menos privilegiado); el operador
+-- Rol por defecto = 'voluntario' (el menos privilegiado); el operador
 -- reasigna rol y centro desde la pantalla de gestión de usuarios.
 -- -----------------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ begin
   values (
     new.id,
     coalesce(new.raw_user_meta_data ->> 'nombre_completo', new.email, 'Sin nombre'),
-    'delivery'
+    'voluntario'
   );
   return new;
 end;
@@ -138,7 +138,7 @@ create trigger trg_perfiles_proteger_rol
   for each row execute function public.proteger_rol_y_centro();
 
 -- -----------------------------------------------------------------------------
--- TRIGGER: en necesidades, logística y delivery solo pueden cambiar `estado`
+-- TRIGGER: en necesidades, logística y voluntario solo pueden cambiar `estado`
 -- (no item, cantidad_requerida, prioridad ni zona_refugio_id).
 -- -----------------------------------------------------------------------------
 
@@ -149,7 +149,7 @@ security definer
 set search_path = public
 as $$
 begin
-  if public.mi_rol() in ('logistica', 'delivery') then
+  if public.mi_rol() in ('logistica', 'voluntario') then
     new.item := old.item;
     new.cantidad_requerida := old.cantidad_requerida;
     new.prioridad := old.prioridad;
@@ -405,10 +405,10 @@ create policy "cobertura_delete_operador_o_jefe"
 -- -----------------------------------------------------------------------------
 -- NECESIDADES
 -- Lectura abierta (tablero tipo "oferta" visible para todos los roles,
--- incluyendo delivery). Creación/borrado: operador o jefe del centro que
+-- incluyendo voluntario). Creación/borrado: operador o jefe del centro que
 -- cubre la zona. Edición de estado: operador, jefe/logística del centro que
--- cubre la zona, y delivery (cualquier zona) — el trigger de arriba garantiza
--- que logística/delivery solo puedan tocar la columna `estado`.
+-- cubre la zona, y voluntario (cualquier zona) — el trigger de arriba garantiza
+-- que logística/voluntario solo puedan tocar la columna `estado`.
 -- -----------------------------------------------------------------------------
 
 create policy "necesidades_select_autenticados"
@@ -429,7 +429,7 @@ create policy "necesidades_update_por_rol"
   to authenticated
   using (
     public.es_operador()
-    or public.mi_rol() = 'delivery'
+    or public.mi_rol() = 'voluntario'
     or (
       public.mi_rol() in ('jefe_centro', 'logistica')
       and public.mi_centro_cubre_zona(zona_refugio_id)
@@ -437,7 +437,7 @@ create policy "necesidades_update_por_rol"
   )
   with check (
     public.es_operador()
-    or public.mi_rol() = 'delivery'
+    or public.mi_rol() = 'voluntario'
     or (
       public.mi_rol() in ('jefe_centro', 'logistica')
       and public.mi_centro_cubre_zona(zona_refugio_id)

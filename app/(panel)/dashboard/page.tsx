@@ -134,9 +134,23 @@ export default async function DashboardPage() {
           {verTodo ? "Centros de acopio" : "Tu centro de acopio"}
         </h2>
         {centrosVisibles.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            No hay centros para mostrar.
-          </p>
+          <Card className="border-dashed">
+            <CardContent className="space-y-2 pt-6 text-sm text-muted-foreground">
+              <p className="font-medium text-foreground">No hay centros en la base de datos.</p>
+              {verTodo ? (
+                <p>
+                  Los centros semilla (Puerto Príncipe, Playa Mansa, Forum, Gestión Social)
+                  están en <code className="text-xs">supabase/seed.sql</code>. Ejecuta ese
+                  archivo en Supabase → SQL Editor y recarga esta página.
+                </p>
+              ) : (
+                <p>
+                  Pide al operador que te asigne un centro desde Usuarios, o que ejecute el
+                  seed inicial en Supabase.
+                </p>
+              )}
+            </CardContent>
+          </Card>
         ) : (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {centrosVisibles.map((centro) => (

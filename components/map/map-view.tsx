@@ -8,7 +8,7 @@ import type { CentroConDetalle, ZonaConDetalle } from "@/types";
 
 // Centrado aproximado sobre la bahía de Pozuelos: Lechería, Barcelona,
 // Puerto La Cruz y Guanta (Anzoátegui, Venezuela).
-const CENTRO_MAPA: [number, number] = [10.205, -64.66];
+const CENTRO_MAPA: [number, number] = [10.175, -64.685];
 const ZOOM_INICIAL = 12;
 
 interface MapViewProps {

@@ -62,7 +62,7 @@ create type rol_usuario_enum as enum (
   'operador',
   'jefe_centro',
   'logistica',
-  'delivery'
+  'voluntario'
 );
 
 -- -----------------------------------------------------------------------------
@@ -117,7 +117,7 @@ comment on table public.zonas_refugio is 'Comunidades / zonas de refugio que nec
 create table public.perfiles (
   id                uuid primary key references auth.users(id) on delete cascade,
   nombre_completo   text not null,
-  rol               rol_usuario_enum not null default 'delivery',
+  rol               rol_usuario_enum not null default 'voluntario',
   centro_acopio_id  uuid references public.centros_acopio(id) on delete set null,
   telefono          text,
   created_at        timestamptz not null default now(),
