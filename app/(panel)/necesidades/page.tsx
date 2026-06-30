@@ -4,6 +4,7 @@ import { getMapaData } from "@/lib/data/queries";
 import { construirZonasConDetalle } from "@/lib/data/derive";
 import { NecesidadesBoard, type NecesidadItem } from "@/components/necesidades/necesidades-board";
 import { NecesidadFormDialog } from "@/components/necesidades/necesidad-form-dialog";
+import { PageHeader } from "@/components/shared/page-header";
 import { Button } from "@/components/ui/button";
 import type { RolUsuario } from "@/types";
 
@@ -69,26 +70,24 @@ export default async function NecesidadesPage() {
         );
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight">Necesidades</h1>
-          <p className="text-sm text-muted-foreground">
-            Tablero de lo que se necesita en cada zona de refugio.
-          </p>
-        </div>
-        {puedeCrear && zonasDisponiblesParaCrear.length > 0 && (
-          <NecesidadFormDialog
-            zonas={zonasDisponiblesParaCrear}
-            trigger={
-              <Button className="h-11 gap-1.5">
-                <Plus className="h-4 w-4" />
-                Nueva necesidad
-              </Button>
-            }
-          />
-        )}
-      </div>
+    <div className="space-y-6">
+      <PageHeader
+        title="Necesidades"
+        description="Tablero de lo que se necesita en cada zona de refugio."
+        action={
+          puedeCrear && zonasDisponiblesParaCrear.length > 0 ? (
+            <NecesidadFormDialog
+              zonas={zonasDisponiblesParaCrear}
+              trigger={
+                <Button className="h-11 gap-1.5">
+                  <Plus className="h-4 w-4" />
+                  Nueva necesidad
+                </Button>
+              }
+            />
+          ) : undefined
+        }
+      />
 
       <NecesidadesBoard
         necesidades={necesidades}

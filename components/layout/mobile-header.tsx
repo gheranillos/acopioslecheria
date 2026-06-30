@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, Menu } from "lucide-react";
 import { logout } from "@/app/login/actions";
+import { BrandMark } from "@/components/shared/brand-mark";
 import { ETIQUETA_ROL } from "@/lib/auth/roles";
 import { navItemsParaRol } from "@/lib/nav";
 import { cn } from "@/lib/utils";
@@ -31,16 +32,11 @@ export function MobileHeader({
   return (
     <header
       className={cn(
-        "flex h-14 shrink-0 items-center justify-between border-b bg-background px-4 md:hidden",
+        "flex h-14 shrink-0 items-center justify-between border-b border-border/70 bg-background/95 px-4 backdrop-blur md:hidden",
         className,
       )}
     >
-      <div className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
-          AL
-        </div>
-        <span className="text-sm font-semibold">Acopios Lechería</span>
-      </div>
+      <BrandMark size="sm" showSubtitle={false} />
 
       <Sheet>
         <SheetTrigger

@@ -46,12 +46,15 @@ export default async function DashboardPage() {
     );
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-semibold tracking-tight">
+    <div className="space-y-8">
+      <header className="border-b border-border/60 pb-5">
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+          Panel operativo
+        </p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight">
           Hola, {perfil.nombre_completo.split(" ")[0]}
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="mt-1.5 text-[15px] text-muted-foreground">
           {ETIQUETA_ROL[perfil.rol]}
           {verTodo
             ? " · viendo todos los centros"
@@ -59,7 +62,7 @@ export default async function DashboardPage() {
               ? ` · ${centrosVisibles[0].nombre}`
               : " · sin centro asignado"}
         </p>
-      </div>
+      </header>
 
       {!verTodo && centrosVisibles.length === 0 && (
         <Card className="border-amber-200 bg-amber-50">
@@ -98,7 +101,9 @@ export default async function DashboardPage() {
       {necesidadesAltaPrioridad.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold">Necesidades de alta prioridad</h2>
+          <h2 className="text-lg font-semibold tracking-tight">
+            Necesidades de alta prioridad
+          </h2>
             <Link
               href="/necesidades"
               className="text-xs font-medium text-primary hover:underline"
@@ -125,7 +130,7 @@ export default async function DashboardPage() {
       )}
 
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold">
+        <h2 className="text-lg font-semibold tracking-tight">
           {verTodo ? "Centros de acopio" : "Tu centro de acopio"}
         </h2>
         {centrosVisibles.length === 0 ? (

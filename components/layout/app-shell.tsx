@@ -20,7 +20,7 @@ export function AppShell({
   const mapaFullBleed = pathname?.startsWith("/mapa") ?? false;
 
   return (
-    <div className="flex min-h-screen flex-col bg-muted/30 md:flex-row">
+    <div className="flex min-h-screen flex-col bg-muted/30 surface-paper md:flex-row">
       <Sidebar perfil={perfil} />
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <MobileHeader perfil={perfil} className={cn(mapaFullBleed && "hidden")} />

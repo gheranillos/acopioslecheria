@@ -5,6 +5,7 @@ import { puedeEditarInventario, puedeEliminarEntidades, veTodosLosCentros } from
 import { InventarioBoard } from "@/components/inventario/inventario-board";
 import { CrearDepositoDialog } from "@/components/inventario/crear-deposito-dialog";
 import { CentroFilterSelect } from "@/components/shared/centro-filter-select";
+import { PageHeader } from "@/components/shared/page-header";
 
 export default async function InventarioPage({
   searchParams,
@@ -26,16 +27,12 @@ export default async function InventarioPage({
   const puedeCrearDeposito = puedeEditar && Boolean(perfil.centro_acopio_id);
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight">Inventario</h1>
-          <p className="text-sm text-muted-foreground">
-            Stock disponible por depósito, organizado por categoría.
-          </p>
-        </div>
-        {verTodo && <CentroFilterSelect centros={centros} valorActual={centroId} />}
-      </div>
+    <div className="space-y-6">
+      <PageHeader
+        title="Inventario"
+        description="Stock disponible por depósito, organizado por categoría."
+        action={verTodo ? <CentroFilterSelect centros={centros} valorActual={centroId} /> : undefined}
+      />
 
       {depositos.length === 0 ? (
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-10 text-center">

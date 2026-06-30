@@ -4,6 +4,7 @@ import { getCentros, getCobertura, getZonas } from "@/lib/data/queries";
 import { puedeGestionarCobertura } from "@/lib/auth/roles";
 import { CoberturaManager } from "@/components/cobertura/cobertura-manager";
 import { CrearZonaDialog } from "@/components/cobertura/crear-zona-dialog";
+import { PageHeader } from "@/components/shared/page-header";
 
 export default async function CoberturaPage() {
   const { perfil } = await requireUsuario();

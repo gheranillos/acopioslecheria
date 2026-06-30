@@ -13,9 +13,11 @@ export function StatCard({
   tone?: "default" | "warning" | "danger";
 }) {
   return (
-    <div className="rounded-xl border bg-background p-4">
+    <div className="rounded-xl border border-border/70 bg-card/90 p-4 shadow-sm">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-medium text-muted-foreground">{label}</span>
+        <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
+          {label}
+        </span>
         <Icon
           className={cn(
             "h-4 w-4",
@@ -25,7 +27,7 @@ export function StatCard({
           )}
         />
       </div>
-      <p className="mt-2 text-2xl font-semibold tabular-nums">{value}</p>
+      <p className="stat-value mt-2">{value}</p>
     </div>
   );
 }

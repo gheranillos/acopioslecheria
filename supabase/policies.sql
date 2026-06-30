@@ -120,6 +120,11 @@ security definer
 set search_path = public
 as $$
 begin
+  -- SQL Editor / migraciones: sin sesión auth.uid(); permitir bootstrap inicial.
+  if auth.uid() is null then
+    return new;
+  end if;
+
   if not public.es_operador() then
     new.rol := old.rol;
     new.centro_acopio_id := old.centro_acopio_id;
