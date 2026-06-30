@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type { Perfil } from "@/types";
 import type { User } from "@supabase/supabase-js";
 
@@ -10,6 +11,8 @@ export interface UsuarioActual {
 
 /** Devuelve el usuario autenticado y su perfil, o null si no hay sesión. */
 export async function getUsuarioActual(): Promise<UsuarioActual | null> {
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = await createClient();
   const {
     data: { user },

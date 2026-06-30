@@ -120,8 +120,18 @@ agregarlo después:
 - Reportes exportables (PDF/Excel)
 - Historial de auditoría detallado por cambio
 
-## 6. Deploy
+## 6. Deploy en Vercel
 
-Pensado para Vercel: conecta el repositorio, configura las mismas variables de entorno
-(`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`) en el proyecto de Vercel y
-despliega.
+1. Conecta el repositorio en [vercel.com](https://vercel.com).
+2. **Antes del primer deploy**, en el proyecto de Vercel ve a **Settings → Environment Variables** y agrega (para Production, Preview y Development):
+
+   | Variable | Valor |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | URL de tu proyecto (Supabase → Settings → API) |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon/public key del mismo panel |
+
+3. Guarda y haz **Redeploy** (Deployments → ⋯ → Redeploy). Sin estas variables la app muestra *Internal Server Error* porque el proxy intenta conectar a Supabase en cada request.
+
+4. En Supabase → Authentication → URL Configuration, agrega tu dominio de Vercel (ej. `https://acopioslecheria.vercel.app`) en **Site URL** y **Redirect URLs**.
+
+Pensado para Vercel: conecta el repositorio, configura las variables de entorno y despliega.

@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 
 const initialState: LoginState = {};
 
-export function LoginForm() {
+export function LoginForm({ disabled = false }: { disabled?: boolean }) {
   const [state, formAction, pending] = useActionState(login, initialState);
 
   return (
@@ -22,6 +22,7 @@ export function LoginForm() {
           type="email"
           autoComplete="email"
           required
+          disabled={disabled}
           placeholder="tucorreo@ejemplo.com"
           className="h-12 text-base"
         />
@@ -34,6 +35,7 @@ export function LoginForm() {
           type="password"
           autoComplete="current-password"
           required
+          disabled={disabled}
           placeholder="••••••••"
           className="h-12 text-base"
         />
@@ -45,7 +47,11 @@ export function LoginForm() {
         </p>
       )}
 
-      <Button type="submit" disabled={pending} className="h-12 w-full text-base">
+      <Button
+        type="submit"
+        disabled={pending || disabled}
+        className="h-12 w-full text-base"
+      >
         {pending && <Loader2 className="h-4 w-4 animate-spin" />}
         {pending ? "Ingresando..." : "Ingresar"}
       </Button>
