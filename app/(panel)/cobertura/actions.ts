@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { requireUsuario } from "@/lib/auth/session";
-import type { Ciudad } from "@/types";
+import type { Ciudad, EstadoZona } from "@/types";
 
 export interface ActionState {
   error?: string;
@@ -15,6 +15,7 @@ function revalidarVistasAfectadas() {
   revalidatePath("/mapa");
   revalidatePath("/dashboard");
   revalidatePath("/necesidades");
+  revalidatePath("/");
 }
 
 export async function agregarCobertura(centroAcopioId: string, zonaRefugioId: string) {
@@ -86,4 +87,15 @@ export async function crearZona(
 
   revalidarVistasAfectadas();
   return { success: true };
+}
+
+export async function actualizarEstadoZona(zonaId: string, estado: EstadoZona) {
+  const { user } = await requireUsuario();
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("zonas_refugio")
+    .update({ estado, updated_by: user.id })
+    .eq("id", zonaId);
+  if (error) throw new Error(error.message);
+  revalidarVistasAfectadas();
 }

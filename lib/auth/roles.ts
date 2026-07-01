@@ -43,6 +43,10 @@ export function puedeGestionarCobertura(rol: RolUsuario) {
   return rol === "operador" || rol === "jefe_centro";
 }
 
+export function puedeEditarEstadoZona(rol: RolUsuario) {
+  return rol === "operador" || rol === "jefe_centro";
+}
+
 export function esSoloLectura(rol: RolUsuario) {
   return rol === "voluntario";
 }

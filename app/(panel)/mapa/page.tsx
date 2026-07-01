@@ -4,6 +4,7 @@ import {
   construirCentrosConDetalle,
   construirZonasConDetalle,
 } from "@/lib/data/derive";
+import { puedeEditarEstadoZona } from "@/lib/auth/roles";
 import { MapShell } from "@/components/map/map-shell";
 
 export default async function MapaPage({
@@ -11,7 +12,7 @@ export default async function MapaPage({
 }: {
   searchParams: Promise<{ centro?: string }>;
 }) {
-  await requireUsuario();
+  const { perfil } = await requireUsuario();
   const [data, params] = await Promise.all([getMapaData(), searchParams]);
 
   const centros = construirCentrosConDetalle(data);
@@ -23,6 +24,9 @@ export default async function MapaPage({
       zonas={zonas}
       perfiles={data.perfiles}
       centroInicialId={params.centro}
+      puedeEditarEstadoZona={puedeEditarEstadoZona(perfil.rol)}
+      esOperador={perfil.rol === "operador"}
+      centroAcopioId={perfil.centro_acopio_id}
     />
   );
 }

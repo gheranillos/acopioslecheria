@@ -28,11 +28,17 @@ export function MapShell({
   zonas,
   perfiles,
   centroInicialId,
+  puedeEditarEstadoZona = false,
+  esOperador = false,
+  centroAcopioId = null,
 }: {
   centros: CentroConDetalle[];
   zonas: ZonaConDetalle[];
   perfiles: Perfil[];
   centroInicialId?: string;
+  puedeEditarEstadoZona?: boolean;
+  esOperador?: boolean;
+  centroAcopioId?: string | null;
 }) {
   const isMobile = useIsMobile();
   const [seleccion, setSeleccion] = useState<Seleccion>(
@@ -53,7 +59,18 @@ export function MapShell({
   const detalle = centroSeleccionado ? (
     <CentroPanel centro={centroSeleccionado} />
   ) : zonaSeleccionada ? (
-    <ZonaPanel zona={zonaSeleccionada} perfiles={perfiles} />
+    <ZonaPanel
+      zona={zonaSeleccionada}
+      perfiles={perfiles}
+      puedeEditarEstado={
+        puedeEditarEstadoZona &&
+        (esOperador ||
+          Boolean(
+            centroAcopioId &&
+              zonaSeleccionada.centros.some((c) => c.id === centroAcopioId),
+          ))
+      }
+    />
   ) : null;
 
   return (

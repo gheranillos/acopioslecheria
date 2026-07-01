@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { requireUsuario } from "@/lib/auth/session";
+import { sincronizarEstadoZona } from "@/lib/data/zona-estado";
 import type { EstadoNecesidad, Prioridad } from "@/types";
 
 export interface ActionState {
@@ -14,6 +15,8 @@ function revalidarVistasAfectadas() {
   revalidatePath("/necesidades");
   revalidatePath("/mapa");
   revalidatePath("/dashboard");
+  revalidatePath("/cobertura");
+  revalidatePath("/");
 }
 
 export async function guardarNecesidad(
@@ -39,6 +42,16 @@ export async function guardarNecesidad(
 
   const supabase = await createClient();
 
+  let zonaAnterior: string | null = null;
+  if (id) {
+    const { data: anterior } = await supabase
+      .from("necesidades")
+      .select("zona_refugio_id")
+      .eq("id", id)
+      .single();
+    zonaAnterior = anterior?.zona_refugio_id ?? null;
+  }
+
   const { error } = id
     ? await supabase
         .from("necesidades")
@@ -55,22 +68,47 @@ export async function guardarNecesidad(
 
   if (error) return { error: error.message };
 
+  await sincronizarEstadoZona(supabase, zona_refugio_id, user.id);
+  if (zonaAnterior && zonaAnterior !== zona_refugio_id) {
+    await sincronizarEstadoZona(supabase, zonaAnterior, user.id);
+  }
+
   revalidarVistasAfectadas();
   return { success: true };
 }
 
 export async function actualizarEstadoNecesidad(id: string, estado: EstadoNecesidad) {
-  await requireUsuario();
+  const { user } = await requireUsuario();
   const supabase = await createClient();
+
+  const { data: necesidad, error: readError } = await supabase
+    .from("necesidades")
+    .select("zona_refugio_id")
+    .eq("id", id)
+    .single();
+  if (readError) throw new Error(readError.message);
+
   const { error } = await supabase.from("necesidades").update({ estado }).eq("id", id);
   if (error) throw new Error(error.message);
+
+  await sincronizarEstadoZona(supabase, necesidad.zona_refugio_id, user.id);
   revalidarVistasAfectadas();
 }
 
 export async function eliminarNecesidad(id: string) {
-  await requireUsuario();
+  const { user } = await requireUsuario();
   const supabase = await createClient();
+
+  const { data: necesidad, error: readError } = await supabase
+    .from("necesidades")
+    .select("zona_refugio_id")
+    .eq("id", id)
+    .single();
+  if (readError) throw new Error(readError.message);
+
   const { error } = await supabase.from("necesidades").delete().eq("id", id);
   if (error) throw new Error(error.message);
+
+  await sincronizarEstadoZona(supabase, necesidad.zona_refugio_id, user.id);
   revalidarVistasAfectadas();
 }

@@ -6,15 +6,18 @@ import {
   EstadoZonaBadge,
   PrioridadBadge,
 } from "@/components/shared/badges";
+import { EstadoZonaQuickSelect } from "@/components/cobertura/estado-zona-quick-select";
 import { esDatoDesactualizado, tiempoRelativo } from "@/lib/utils/relative-time";
 import type { Perfil, ZonaConDetalle } from "@/types";
 
 export function ZonaPanel({
   zona,
   perfiles,
+  puedeEditarEstado = false,
 }: {
   zona: ZonaConDetalle;
   perfiles: Perfil[];
+  puedeEditarEstado?: boolean;
 }) {
   const actualizadoPor = perfiles.find((p) => p.id === zona.updated_by);
   const desactualizado = esDatoDesactualizado(zona.updated_at);
@@ -34,7 +37,11 @@ export function ZonaPanel({
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <EstadoZonaBadge estado={zona.estado} />
+        {puedeEditarEstado ? (
+          <EstadoZonaQuickSelect zonaId={zona.id} estadoInicial={zona.estado} />
+        ) : (
+          <EstadoZonaBadge estado={zona.estado} />
+        )}
         {desactualizado && <DatoDesactualizadoBadge />}
       </div>
 

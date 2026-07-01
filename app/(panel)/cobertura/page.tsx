@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { requireUsuario } from "@/lib/auth/session";
 import { getCentros, getCobertura, getZonas } from "@/lib/data/queries";
-import { puedeGestionarCobertura } from "@/lib/auth/roles";
+import { puedeGestionarCobertura, puedeEditarEstadoZona } from "@/lib/auth/roles";
 import { CoberturaManager } from "@/components/cobertura/cobertura-manager";
 import { CrearZonaDialog } from "@/components/cobertura/crear-zona-dialog";
 import { PageHeader } from "@/components/shared/page-header";
@@ -27,7 +27,7 @@ export default async function CoberturaPage() {
         <div>
           <h1 className="text-xl font-semibold tracking-tight">Cobertura</h1>
           <p className="text-sm text-muted-foreground">
-            Qué zonas de refugio cubre cada centro de acopio.
+            Qué zonas de refugio cubre cada centro y su estado de abastecimiento.
           </p>
         </div>
         <CrearZonaDialog
@@ -60,6 +60,7 @@ export default async function CoberturaPage() {
                 centro={centro}
                 zonasCubiertas={zonasCubiertas}
                 zonasDisponibles={zonasDisponibles}
+                puedeEditarEstado={puedeEditarEstadoZona(perfil.rol)}
               />
             );
           })}

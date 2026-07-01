@@ -13,16 +13,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EstadoZonaBadge } from "@/components/shared/badges";
+import { EstadoZonaQuickSelect } from "@/components/cobertura/estado-zona-quick-select";
 import type { CentroAcopio, ZonaRefugio } from "@/types";
 
 export function CoberturaManager({
   centro,
   zonasCubiertas,
   zonasDisponibles,
+  puedeEditarEstado = false,
 }: {
   centro: CentroAcopio;
   zonasCubiertas: ZonaRefugio[];
   zonasDisponibles: ZonaRefugio[];
+  puedeEditarEstado?: boolean;
 }) {
   const [seleccionada, setSeleccionada] = useState("");
   const [pending, startTransition] = useTransition();
@@ -68,9 +71,13 @@ export function CoberturaManager({
               key={z.id}
               className="flex items-center justify-between gap-2 rounded-lg border p-2.5"
             >
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-medium">{z.nombre}</span>
-                <EstadoZonaBadge estado={z.estado} />
+              <div className="min-w-0 flex-1 space-y-2">
+                <span className="block text-sm font-medium">{z.nombre}</span>
+                {puedeEditarEstado ? (
+                  <EstadoZonaQuickSelect zonaId={z.id} estadoInicial={z.estado} compact />
+                ) : (
+                  <EstadoZonaBadge estado={z.estado} />
+                )}
               </div>
               <Button
                 variant="ghost"
