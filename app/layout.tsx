@@ -7,13 +7,17 @@ export const metadata: Metadata = {
   title: "Acopios Lechería",
   description:
     "Coordinación de ayuda humanitaria post-terremoto en Anzoátegui: centros de acopio, zonas de refugio y necesidades en tiempo real.",
+  icons: {
+    icon: "/logo-acopios-lecheria.png",
+    apple: "/logo-acopios-lecheria.png",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#1a1a1a",
+  themeColor: "#001d3d",
 };
 
 export default function RootLayout({

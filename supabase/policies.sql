@@ -469,3 +469,44 @@ create policy "necesidades_delete_operador_o_jefe_cobertura"
     public.es_operador()
     or (public.mi_rol() = 'jefe_centro' and public.mi_centro_cubre_zona(zona_refugio_id))
   );
+
+-- -----------------------------------------------------------------------------
+-- HOME DONANTE (público, sin login)
+-- RPC de solo lectura; la app la invoca con la anon key.
+-- -----------------------------------------------------------------------------
+
+create or replace function public.obtener_datos_donante()
+returns json
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select json_build_object(
+    'centros', coalesce((
+      select json_agg(to_jsonb(c) order by c.nombre)
+      from public.centros_acopio c
+      where c.estado = 'activo'
+    ), '[]'::json),
+    'zonas', coalesce((
+      select json_agg(to_jsonb(z) order by z.nombre)
+      from public.zonas_refugio z
+    ), '[]'::json),
+    'necesidades', coalesce((
+      select json_agg(
+        to_jsonb(n) || jsonb_build_object(
+          'zona', jsonb_build_object('nombre', z.nombre, 'ciudad', z.ciudad)
+        )
+        order by
+          case n.prioridad when 'alta' then 0 when 'media' then 1 else 2 end,
+          n.created_at desc
+      )
+      from public.necesidades n
+      inner join public.zonas_refugio z on z.id = n.zona_refugio_id
+      where n.estado in ('abierta', 'en_proceso')
+    ), '[]'::json)
+  );
+$$;
+
+revoke all on function public.obtener_datos_donante() from public;
+grant execute on function public.obtener_datos_donante() to anon, authenticated;

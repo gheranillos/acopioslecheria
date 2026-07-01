@@ -1,60 +1,64 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+
+const LOGO_SRC = "/logo-acopios-lecheria.png";
 
 export function BrandMark({
   size = "md",
-  showSubtitle = true,
+  showSubtitle = false,
   layout = "row",
+  variant = "default",
   className,
 }: {
   size?: "sm" | "md" | "lg";
+  /** Muestra "Anzoátegui" bajo el logo (el PNG ya incluye el nombre). */
   showSubtitle?: boolean;
   layout?: "row" | "stacked";
+  /** default = fondo claro; inverted = sobre azul marino/cian (blend para quitar el negro del PNG) */
+  variant?: "default" | "inverted";
   className?: string;
 }) {
   const sizes = {
-    sm: {
-      mark: "h-8 w-8 text-sm",
-      title: "text-base",
-      subtitle: "text-[11px]",
-    },
-    md: {
-      mark: "h-10 w-10 text-base",
-      title: "text-xl",
-      subtitle: "text-xs",
-    },
-    lg: {
-      mark: "h-14 w-14 text-xl",
-      title: "text-3xl",
-      subtitle: "text-sm",
-    },
+    sm: { image: "h-9 w-auto max-w-[7.5rem]", subtitle: "text-[10px]" },
+    md: { image: "h-11 w-auto max-w-[9rem]", subtitle: "text-[11px]" },
+    lg: { image: "h-28 w-auto max-w-[14rem] sm:h-32", subtitle: "text-sm" },
   }[size];
+
+  const inverted = variant === "inverted";
 
   return (
     <div
       className={cn(
         layout === "stacked"
-          ? "flex flex-col items-center gap-3 text-center"
-          : "flex items-center gap-3",
+          ? "flex flex-col items-center gap-2 text-center"
+          : "flex items-center gap-2.5",
         className,
       )}
     >
-      <div
+      <Image
+        src={LOGO_SRC}
+        alt="Acopios Lechería"
+        width={320}
+        height={400}
+        priority={size === "lg"}
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground",
-          sizes.mark,
+          "shrink-0 object-contain object-left",
+          sizes.image,
+          inverted && "mix-blend-screen",
         )}
-        aria-hidden
-      >
-        AL
-      </div>
-      <div className="min-w-0 leading-tight">
-        <p className={cn("font-semibold tracking-tight", sizes.title)}>
-          Acopios Lechería
+      />
+      {showSubtitle && (
+        <p
+          className={cn(
+            "font-semibold uppercase tracking-[0.2em]",
+            sizes.subtitle,
+            layout === "stacked" ? "text-center" : "leading-none",
+            inverted ? "text-white/75" : "text-muted-foreground",
+          )}
+        >
+          Anzoátegui
         </p>
-        {showSubtitle && (
-          <p className={cn("text-muted-foreground", sizes.subtitle)}>Anzoátegui</p>
-        )}
-      </div>
+      )}
     </div>
   );
 }

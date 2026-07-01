@@ -9,7 +9,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-orange: var(--brand-orange);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,69 +51,75 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Minimalista: blanco, grises neutros, acento azul sobrio */
+/* Línea gráfica Lechería: azul marino + cian + acento naranja (emergencia) */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0 0);
-  --primary: oklch(0.22 0 0);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.22 0 0);
-  --muted: oklch(0.965 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.965 0 0);
-  --accent-foreground: oklch(0.22 0 0);
-  --destructive: oklch(0.55 0.2 25);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.65 0 0);
-  --chart-1: oklch(0.55 0.12 250);
-  --chart-2: oklch(0.6 0.08 180);
-  --chart-3: oklch(0.45 0 0);
-  --chart-4: oklch(0.7 0 0);
-  --chart-5: oklch(0.35 0 0);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.99 0 0);
-  --sidebar-foreground: oklch(0.18 0 0);
-  --sidebar-primary: oklch(0.22 0 0);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.965 0 0);
-  --sidebar-accent-foreground: oklch(0.22 0 0);
-  --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.65 0 0);
+  --brand-navy: #001d3d;
+  --brand-navy-mid: #003366;
+  --brand-cyan: #00aeef;
+  --brand-cyan-dark: #0088c2;
+  --brand-orange: #e87722;
+
+  --background: #f4f9fc;
+  --foreground: #001d3d;
+  --card: #ffffff;
+  --card-foreground: #001d3d;
+  --popover: #ffffff;
+  --popover-foreground: #001d3d;
+  --primary: #00aeef;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f6fc;
+  --secondary-foreground: #001d3d;
+  --muted: #e8f2f8;
+  --muted-foreground: #4a6278;
+  --accent: #d6effa;
+  --accent-foreground: #001d3d;
+  --destructive: #dc2626;
+  --border: #c5dce8;
+  --input: #c5dce8;
+  --ring: #00aeef;
+  --chart-1: #00aeef;
+  --chart-2: #0088c2;
+  --chart-3: #001d3d;
+  --chart-4: #e87722;
+  --chart-5: #4a6278;
+  --radius: 0.75rem;
+  --sidebar: #001d3d;
+  --sidebar-foreground: #f0f9ff;
+  --sidebar-primary: #00aeef;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #003366;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #003366;
+  --sidebar-ring: #00aeef;
 }
 
 .dark {
-  --background: oklch(0.14 0 0);
-  --foreground: oklch(0.96 0 0);
-  --card: oklch(0.17 0 0);
-  --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.17 0 0);
-  --popover-foreground: oklch(0.96 0 0);
-  --primary: oklch(0.96 0 0);
-  --primary-foreground: oklch(0.14 0 0);
-  --secondary: oklch(0.22 0 0);
-  --secondary-foreground: oklch(0.96 0 0);
-  --muted: oklch(0.22 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.24 0 0);
-  --accent-foreground: oklch(0.96 0 0);
-  --destructive: oklch(0.65 0.18 25);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.55 0 0);
-  --sidebar: oklch(0.16 0 0);
-  --sidebar-foreground: oklch(0.96 0 0);
-  --sidebar-primary: oklch(0.96 0 0);
-  --sidebar-primary-foreground: oklch(0.14 0 0);
-  --sidebar-accent: oklch(0.24 0 0);
-  --sidebar-accent-foreground: oklch(0.96 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.55 0 0);
+  --background: #0a1628;
+  --foreground: #f0f9ff;
+  --card: #001d3d;
+  --card-foreground: #f0f9ff;
+  --popover: #001d3d;
+  --popover-foreground: #f0f9ff;
+  --primary: #00aeef;
+  --primary-foreground: #001d3d;
+  --secondary: #003366;
+  --secondary-foreground: #f0f9ff;
+  --muted: #003366;
+  --muted-foreground: #94b8cc;
+  --accent: #003366;
+  --accent-foreground: #f0f9ff;
+  --destructive: #f87171;
+  --border: #1e4a6e;
+  --input: #1e4a6e;
+  --ring: #00aeef;
+  --sidebar: #000f1f;
+  --sidebar-foreground: #f0f9ff;
+  --sidebar-primary: #00aeef;
+  --sidebar-primary-foreground: #001d3d;
+  --sidebar-accent: #003366;
+  --sidebar-accent-foreground: #f0f9ff;
+  --sidebar-border: #1e4a6e;
+  --sidebar-ring: #00aeef;
 }
 
 @layer base {
@@ -137,7 +146,8 @@
   [data-slot="sheet-title"],
   [data-slot="dialog-title"],
   [data-slot="alert-dialog-title"] {
-    @apply font-sans font-semibold tracking-tight text-foreground;
+    font-family: var(--font-heading), var(--font-sans), sans-serif;
+    @apply font-bold tracking-tight text-foreground;
   }
 
   h1 {
@@ -149,16 +159,16 @@
   }
 
   h3 {
-    @apply text-lg font-medium;
+    @apply text-lg font-semibold;
   }
 
   label {
-    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground;
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground;
   }
 
   ::selection {
-    background: oklch(0.9 0 0);
-    color: oklch(0.15 0 0);
+    background: #00aeef;
+    color: #ffffff;
   }
 }
 
@@ -168,6 +178,47 @@
   }
 
   .stat-value {
-    @apply text-3xl font-semibold tabular-nums tracking-tight;
+    @apply text-3xl font-bold tabular-nums tracking-tight text-brand-cyan;
+  }
+
+  /* Hero estilo material municipal Lechería */
+  .brand-hero {
+    background: linear-gradient(
+      165deg,
+      #00aeef 0%,
+      #0099d6 42%,
+      #0077b3 78%,
+      #001d3d 100%
+    );
+    color: #ffffff;
+  }
+
+  .brand-hero h1,
+  .brand-hero h2,
+  .brand-hero p {
+    color: inherit;
+  }
+
+  .brand-pill {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider;
+    background: var(--brand-navy);
+    color: #ffffff;
+  }
+
+  .brand-stat-card {
+    @apply rounded-2xl border-0 bg-white px-3 py-4 text-center shadow-md;
+  }
+
+  .brand-stat-card .stat-number {
+    @apply mt-2 text-2xl font-bold tabular-nums text-brand-cyan;
+  }
+
+  .brand-section-title {
+    @apply text-lg font-bold uppercase tracking-wide text-brand-navy;
+  }
+
+  .brand-cta-band {
+    background: linear-gradient(90deg, #001d3d 0%, #003366 100%);
+    color: #ffffff;
   }
 }

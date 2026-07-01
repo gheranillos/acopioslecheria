@@ -7,7 +7,7 @@ import type { NecesidadPublica } from "@/lib/data/public-queries";
 
 export function DonanteNecesidadCard({ necesidad }: { necesidad: NecesidadPublica }) {
   return (
-    <article className="flex flex-col rounded-xl border bg-card p-4 shadow-sm">
+    <article className="flex flex-col overflow-hidden rounded-2xl border-0 bg-card p-4 shadow-sm ring-1 ring-brand-cyan/15">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <h3 className="text-sm font-semibold leading-snug">{necesidad.item}</h3>

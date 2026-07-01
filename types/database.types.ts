@@ -1,6 +1,14 @@
 // Tipos generados a mano a partir de supabase/schema.sql.
 // Si en el futuro se usa `supabase gen types typescript`, este archivo puede reemplazarse.
 
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
 export type Ciudad = "Lechería" | "Barcelona" | "Puerto La Cruz" | "Guanta";
 
 export type EstadoCentro = "activo" | "inactivo";
@@ -244,7 +252,12 @@ export interface Database {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      obtener_datos_donante: {
+        Args: Record<string, never>;
+        Returns: Json;
+      };
+    };
     Enums: {
       ciudad_enum: Ciudad;
       estado_centro_enum: EstadoCentro;

@@ -32,11 +32,11 @@ export function MobileHeader({
   return (
     <header
       className={cn(
-        "flex h-14 shrink-0 items-center justify-between border-b border-border/70 bg-background/95 px-4 backdrop-blur md:hidden",
+        "flex h-14 shrink-0 items-center justify-between border-b border-brand-navy/20 bg-brand-navy px-4 shadow-sm md:hidden",
         className,
       )}
     >
-      <BrandMark size="sm" showSubtitle={false} />
+      <BrandMark size="sm" showSubtitle={false} variant="inverted" />
 
       <Sheet>
         <SheetTrigger
@@ -45,7 +45,7 @@ export function MobileHeader({
               variant="ghost"
               size="icon"
               aria-label="Abrir menú"
-              className="h-11 w-11"
+              className="h-11 w-11 text-white hover:bg-white/10"
             >
               <Menu className="h-5 w-5" />
             </Button>

@@ -4,7 +4,7 @@ export function MapLegend() {
       <p className="mb-1.5 font-semibold">Leyenda</p>
       <div className="space-y-1">
         <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-sm bg-[#155dfc]" />
+          <span className="h-3 w-3 rounded-sm bg-brand-cyan" />
           Centro de acopio
         </div>
         <div className="flex items-center gap-2">

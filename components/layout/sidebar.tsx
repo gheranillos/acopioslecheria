@@ -16,9 +16,9 @@ export function Sidebar({ perfil }: { perfil: Perfil }) {
   const items = navItemsParaRol(perfil.rol);
 
   return (
-    <aside className="hidden md:flex md:w-64 md:shrink-0 md:flex-col md:border-r md:border-border/70 md:bg-sidebar">
-      <div className="flex h-[4.25rem] items-center border-b border-border/70 px-5">
-        <BrandMark size="sm" />
+    <aside className="hidden bg-sidebar text-sidebar-foreground md:flex md:w-64 md:shrink-0 md:flex-col md:border-r md:border-sidebar-border">
+      <div className="flex h-[4.25rem] items-center border-b border-sidebar-border px-5">
+        <BrandMark size="sm" variant="inverted" className="items-start" />
       </div>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto p-3">
@@ -30,10 +30,10 @@ export function Sidebar({ perfil }: { perfil: Perfil }) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2.5 text-[15px] transition-colors",
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-medium transition-colors",
                 active
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
+                  : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-white",
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -43,18 +43,16 @@ export function Sidebar({ perfil }: { perfil: Perfil }) {
         })}
       </nav>
 
-      <div className="border-t border-border/70 p-3">
-        <div className="mb-2 px-1">
-          <p className="truncate text-[15px] font-medium">{perfil.nombre_completo}</p>
-          <p className="text-xs tracking-wide text-muted-foreground">
-            {ETIQUETA_ROL[perfil.rol]}
-          </p>
+      <div className="border-t border-sidebar-border p-3">
+        <div className="mb-2 rounded-xl bg-sidebar-accent px-3 py-2">
+          <p className="truncate text-[15px] font-medium text-white">{perfil.nombre_completo}</p>
+          <p className="text-xs text-white/70">{ETIQUETA_ROL[perfil.rol]}</p>
         </div>
         <form action={logout}>
           <Button
             type="submit"
             variant="ghost"
-            className="w-full justify-start gap-2 text-muted-foreground"
+            className="w-full justify-start gap-2 text-white/75 hover:bg-sidebar-accent hover:text-white"
           >
             <LogOut className="h-4 w-4" />
             Cerrar sesión

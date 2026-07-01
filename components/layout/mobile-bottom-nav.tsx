@@ -19,7 +19,7 @@ export function MobileBottomNav({
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 grid border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden",
+        "fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-white/95 shadow-[0_-4px_20px_rgba(0,29,61,0.08)] backdrop-blur md:hidden",
         "pb-[env(safe-area-inset-bottom)]",
         className,
       )}
@@ -34,7 +34,7 @@ export function MobileBottomNav({
             href={item.href}
             className={cn(
               "flex min-h-[56px] flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium",
-              active ? "text-primary" : "text-muted-foreground",
+              active ? "text-brand-cyan" : "text-muted-foreground",
             )}
           >
             <item.icon className="h-5 w-5" />

@@ -7,7 +7,7 @@ export function DonanteZonaRow({ zona }: { zona: ZonaRefugio }) {
   const desactualizado = esDatoDesactualizado(zona.updated_at);
 
   return (
-    <li className="flex flex-col gap-2 rounded-xl border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <li className="flex flex-col gap-2 overflow-hidden rounded-2xl bg-card p-4 shadow-sm ring-1 ring-brand-cyan/10 sm:flex-row sm:items-center sm:justify-between">
       <div className="min-w-0">
         <p className="text-sm font-semibold">{zona.nombre}</p>
         <p className="flex items-center gap-1 text-xs text-muted-foreground">
