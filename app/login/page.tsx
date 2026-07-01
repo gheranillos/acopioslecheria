@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LoginForm } from "@/components/auth/login-form";
 import { BrandMark } from "@/components/shared/brand-mark";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,7 +24,7 @@ export default function LoginPage() {
         <div className="space-y-3 text-center">
           <BrandMark size="lg" layout="stacked" />
           <p className="mx-auto max-w-xs text-[15px] leading-relaxed text-muted-foreground">
-            Coordinación de ayuda humanitaria en Anzoátegui
+            Acceso para operadores, jefes de centro, logística y voluntarios.
           </p>
         </div>
 
@@ -34,7 +35,10 @@ export default function LoginPage() {
         </Card>
 
         <p className="text-center text-xs leading-relaxed tracking-wide text-muted-foreground">
-          ¿No tienes cuenta? Contacta al operador del sistema para que te dé acceso.
+          Acceso reservado al equipo operativo.{" "}
+          <Link href="/" className="underline-offset-4 hover:underline">
+            Volver al inicio
+          </Link>
         </p>
       </div>
     </main>

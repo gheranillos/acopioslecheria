@@ -216,6 +216,12 @@ create policy "centros_select_autenticados"
   to authenticated
   using (true);
 
+-- Home público (rol donante): solo centros activos, sin login.
+create policy "centros_select_anon"
+  on public.centros_acopio for select
+  to anon
+  using (estado = 'activo');
+
 create policy "centros_insert_operador"
   on public.centros_acopio for insert
   to authenticated
@@ -356,6 +362,12 @@ create policy "zonas_select_autenticados"
   to authenticated
   using (true);
 
+-- Home público (rol donante): estado de zonas visible sin login.
+create policy "zonas_select_anon"
+  on public.zonas_refugio for select
+  to anon
+  using (true);
+
 create policy "zonas_insert_operador_o_jefe"
   on public.zonas_refugio for insert
   to authenticated
@@ -415,6 +427,12 @@ create policy "necesidades_select_autenticados"
   on public.necesidades for select
   to authenticated
   using (true);
+
+-- Home público (rol donante): necesidades abiertas o en proceso, sin login.
+create policy "necesidades_select_anon"
+  on public.necesidades for select
+  to anon
+  using (estado in ('abierta', 'en_proceso'));
 
 create policy "necesidades_insert_operador_o_jefe_cobertura"
   on public.necesidades for insert

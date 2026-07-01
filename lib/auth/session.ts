@@ -31,9 +31,18 @@ export async function getUsuarioActual(): Promise<UsuarioActual | null> {
   return { user, perfil };
 }
 
-/** Igual que getUsuarioActual, pero redirige a /login si no hay sesión válida. */
+/** Igual que requireUsuario, pero redirige a /login si no hay sesión válida. */
 export async function requireUsuario(): Promise<UsuarioActual> {
   const actual = await getUsuarioActual();
   if (!actual) redirect("/login");
+  return actual;
+}
+
+/** Solo operadores. Usar en acciones de administración (usuarios, centros). */
+export async function requireOperador(): Promise<UsuarioActual> {
+  const actual = await requireUsuario();
+  if (actual.perfil.rol !== "operador") {
+    throw new Error("Solo un operador puede realizar esta acción.");
+  }
   return actual;
 }
