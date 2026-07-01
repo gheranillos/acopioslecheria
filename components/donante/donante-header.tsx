@@ -5,7 +5,12 @@ export function DonanteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-brand-navy shadow-md">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:h-16 sm:px-6">
-        <BrandMark size="sm" showSubtitle={false} variant="inverted" />
+        <div className="flex min-w-0 items-center gap-2.5">
+          <BrandMark size="sm" mark="isotipo" showSubtitle={false} variant="inverted" />
+          <span className="truncate text-sm font-bold text-white sm:text-base">
+            Acopios Lechería
+          </span>
+        </div>
         <Link
           href="/login"
           className="shrink-0 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/90 transition-colors hover:bg-brand-cyan hover:text-white sm:text-sm"

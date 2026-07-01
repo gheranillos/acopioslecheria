@@ -2,12 +2,14 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/logo-acopios-lecheria.png";
+const ISOTIPO_SRC = "/isotipo-acopios-lecheria.png";
 
 export function BrandMark({
   size = "md",
   showSubtitle = false,
   layout = "row",
   variant = "default",
+  mark = "full",
   className,
 }: {
   size?: "sm" | "md" | "lg";
@@ -16,15 +18,27 @@ export function BrandMark({
   layout?: "row" | "stacked";
   /** default = fondo claro; inverted = sobre azul marino/cian (blend para quitar el negro del PNG) */
   variant?: "default" | "inverted";
+  /** full = logo completo; isotipo = símbolo compacto (header, favicon) */
+  mark?: "full" | "isotipo";
   className?: string;
 }) {
   const sizes = {
-    sm: { image: "h-9 w-auto max-w-[7.5rem]", subtitle: "text-[10px]" },
-    md: { image: "h-11 w-auto max-w-[9rem]", subtitle: "text-[11px]" },
-    lg: { image: "h-28 w-auto max-w-[14rem] sm:h-32", subtitle: "text-sm" },
+    sm: {
+      image: mark === "isotipo" ? "h-9 w-9" : "h-9 w-auto max-w-[7.5rem]",
+      subtitle: "text-[10px]",
+    },
+    md: {
+      image: mark === "isotipo" ? "h-11 w-11" : "h-11 w-auto max-w-[9rem]",
+      subtitle: "text-[11px]",
+    },
+    lg: {
+      image: mark === "isotipo" ? "h-24 w-24 sm:h-28 sm:w-28" : "h-28 w-auto max-w-[14rem] sm:h-32",
+      subtitle: "text-sm",
+    },
   }[size];
 
   const inverted = variant === "inverted";
+  const src = mark === "isotipo" ? ISOTIPO_SRC : LOGO_SRC;
 
   return (
     <div
@@ -36,13 +50,14 @@ export function BrandMark({
       )}
     >
       <Image
-        src={LOGO_SRC}
+        src={src}
         alt="Acopios Lechería"
-        width={320}
-        height={400}
+        width={mark === "isotipo" ? 128 : 320}
+        height={mark === "isotipo" ? 128 : 400}
         priority={size === "lg"}
         className={cn(
-          "shrink-0 object-contain object-left",
+          "shrink-0 object-contain",
+          mark === "isotipo" ? "object-center" : "object-left",
           sizes.image,
           inverted && "mix-blend-screen",
         )}

@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description:
     "Coordinación de ayuda humanitaria post-terremoto en Anzoátegui: centros de acopio, zonas de refugio y necesidades en tiempo real.",
   icons: {
-    icon: "/logo-acopios-lecheria.png",
-    apple: "/logo-acopios-lecheria.png",
+    icon: "/isotipo-acopios-lecheria.png",
+    apple: "/isotipo-acopios-lecheria.png",
   },
 };
 

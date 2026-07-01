@@ -213,6 +213,10 @@
     @apply mt-2 text-2xl font-bold tabular-nums text-brand-cyan;
   }
 
+  .brand-stat-card .stat-label {
+    @apply mt-1 text-xs font-semibold leading-snug text-brand-navy;
+  }
+
   .brand-section-title {
     @apply text-lg font-bold uppercase tracking-wide text-brand-navy;
   }

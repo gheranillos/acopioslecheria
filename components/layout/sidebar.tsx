@@ -18,7 +18,7 @@ export function Sidebar({ perfil }: { perfil: Perfil }) {
   return (
     <aside className="hidden bg-sidebar text-sidebar-foreground md:flex md:w-64 md:shrink-0 md:flex-col md:border-r md:border-sidebar-border">
       <div className="flex h-[4.25rem] items-center border-b border-sidebar-border px-5">
-        <BrandMark size="sm" variant="inverted" className="items-start" />
+        <BrandMark size="sm" mark="isotipo" variant="inverted" className="items-start" />
       </div>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto p-3">

@@ -49,23 +49,17 @@ export default async function HomePage() {
                 <div className="brand-stat-card">
                   <Package className="mx-auto h-5 w-5 text-brand-cyan" />
                   <p className="stat-number">{countNecesidadesDonante(data)}</p>
-                  <p className="text-[11px] font-semibold text-brand-navy/70 sm:text-xs">
-                    Necesidades activas
-                  </p>
+                  <p className="stat-label">Necesidades activas</p>
                 </div>
                 <div className="brand-stat-card">
                   <Heart className="mx-auto h-5 w-5 text-brand-cyan" />
                   <p className="stat-number">{data.zonas.length}</p>
-                  <p className="text-[11px] font-semibold text-brand-navy/70 sm:text-xs">
-                    Zonas de refugio
-                  </p>
+                  <p className="stat-label">Zonas de refugio</p>
                 </div>
                 <div className="brand-stat-card">
                   <MapPin className="mx-auto h-5 w-5 text-brand-cyan" />
                   <p className="stat-number">{data.centros.length}</p>
-                  <p className="text-[11px] font-semibold text-brand-navy/70 sm:text-xs">
-                    Centros de acopio
-                  </p>
+                  <p className="stat-label">Centros de acopio</p>
                 </div>
               </div>
             )}

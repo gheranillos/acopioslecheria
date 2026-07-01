@@ -36,7 +36,7 @@ export function MobileHeader({
         className,
       )}
     >
-      <BrandMark size="sm" showSubtitle={false} variant="inverted" />
+      <BrandMark size="sm" mark="isotipo" showSubtitle={false} variant="inverted" />
 
       <Sheet>
         <SheetTrigger
