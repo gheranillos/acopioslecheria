@@ -23,14 +23,27 @@ export function DonanteHeader() {
 export function DonanteFooter() {
   return (
     <footer className="brand-cta-band">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-2 px-4 py-8 text-center text-xs text-white/85 sm:flex-row sm:justify-between sm:text-left">
-        <p>Acopios Lechería · Coordinación humanitaria en Anzoátegui</p>
-        <Link
-          href="/login"
-          className="rounded-full border border-white/30 px-3 py-1 font-semibold text-white transition-colors hover:bg-brand-cyan hover:border-brand-cyan"
-        >
-          Acceso equipo
-        </Link>
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <div className="flex flex-col items-center gap-2 text-center text-xs text-white/85 sm:flex-row sm:justify-between sm:text-left">
+          <p>Acopios Lechería · Coordinación humanitaria en Anzoátegui</p>
+          <Link
+            href="/login"
+            className="rounded-full border border-white/30 px-3 py-1 font-semibold text-white transition-colors hover:border-brand-cyan hover:bg-brand-cyan"
+          >
+            Acceso equipo
+          </Link>
+        </div>
+        <p className="mt-4 text-center text-[11px] text-white/45">
+          Powered by{" "}
+          <a
+            href="https://instagram.com/gheranillos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/65 transition-colors hover:text-brand-cyan"
+          >
+            @gheranillos
+          </a>
+        </p>
       </div>
     </footer>
   );
