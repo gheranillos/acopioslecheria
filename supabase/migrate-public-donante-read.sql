@@ -21,6 +21,12 @@ create policy "necesidades_select_anon"
   to anon
   using (estado in ('abierta', 'en_proceso'));
 
+drop policy if exists "cobertura_select_anon" on public.cobertura_centro_zona;
+create policy "cobertura_select_anon"
+  on public.cobertura_centro_zona for select
+  to anon
+  using (true);
+
 -- Función RPC: la app la usa como vía principal (security definer, lectura acotada)
 create or replace function public.obtener_datos_donante()
 returns json
@@ -39,18 +45,32 @@ as $$
       select json_agg(to_jsonb(z) order by z.nombre)
       from public.zonas_refugio z
     ), '[]'::json),
-    'necesidades', coalesce((
-      select json_agg(
-        to_jsonb(n) || jsonb_build_object(
-          'zona', jsonb_build_object('nombre', z.nombre, 'ciudad', z.ciudad)
-        )
-        order by
-          case n.prioridad when 'alta' then 0 when 'media' then 1 else 2 end,
-          n.created_at desc
-      )
-      from public.necesidades n
-      inner join public.zonas_refugio z on z.id = n.zona_refugio_id
-      where n.estado in ('abierta', 'en_proceso')
+    'necesidades_por_centro', coalesce((
+      select json_agg(centro_group order by centro_group->'centro'->>'nombre')
+      from (
+        select json_build_object(
+          'centro', jsonb_build_object(
+            'id', c.id,
+            'nombre', c.nombre,
+            'ciudad', c.ciudad
+          ),
+          'necesidades', (
+            select coalesce(json_agg(
+              to_jsonb(n) order by
+                case n.prioridad when 'alta' then 0 when 'media' then 1 else 2 end,
+                n.created_at desc
+            ), '[]'::json)
+            from public.necesidades n
+            inner join public.cobertura_centro_zona ccz
+              on ccz.zona_refugio_id = n.zona_refugio_id
+             and ccz.centro_acopio_id = c.id
+            where n.estado in ('abierta', 'en_proceso')
+          )
+        ) as centro_group
+        from public.centros_acopio c
+        where c.estado = 'activo'
+      ) groups
+      where (groups.centro_group->'necesidades')::jsonb <> '[]'::jsonb
     ), '[]'::json)
   );
 $$;

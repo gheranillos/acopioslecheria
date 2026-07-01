@@ -2,10 +2,10 @@ import { redirect } from "next/navigation";
 import { Heart, MapPin, Package } from "lucide-react";
 import { DonanteFooter, DonanteHeader } from "@/components/donante/donante-header";
 import { DonanteMap } from "@/components/donante/donante-map";
-import { DonanteNecesidadCard } from "@/components/donante/donante-necesidad-card";
+import { DonanteCentroNecesidades } from "@/components/donante/donante-centro-necesidades";
 import { DonanteZonaRow } from "@/components/donante/donante-zona-row";
 import { getUsuarioActual } from "@/lib/auth/session";
-import { getDonanteData } from "@/lib/data/public-queries";
+import { countNecesidadesDonante, getDonanteData } from "@/lib/data/public-queries";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export default async function HomePage() {
@@ -20,7 +20,7 @@ export default async function HomePage() {
     data &&
     data.centros.length === 0 &&
     data.zonas.length === 0 &&
-    data.necesidades.length === 0;
+    data.necesidadesPorCentro.length === 0;
 
   return (
     <div className="surface-paper flex min-h-screen flex-col">
@@ -48,7 +48,7 @@ export default async function HomePage() {
               <div className="mx-auto mt-8 grid max-w-lg grid-cols-3 gap-3 sm:max-w-xl">
                 <div className="brand-stat-card">
                   <Package className="mx-auto h-5 w-5 text-brand-cyan" />
-                  <p className="stat-number">{data.necesidades.length}</p>
+                  <p className="stat-number">{countNecesidadesDonante(data)}</p>
                   <p className="text-[11px] font-semibold text-brand-navy/70 sm:text-xs">
                     Necesidades activas
                   </p>
@@ -107,20 +107,21 @@ export default async function HomePage() {
               <div className="mb-6">
                 <h2 className="brand-section-title">Qué se necesita ahora</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Publicado por los equipos de los centros de acopio y zonas de refugio.
+                  Publicado por los centros de acopio. Lleva tu aporte al centro indicado;
+                  ellos coordinan la entrega a las comunidades.
                 </p>
               </div>
 
-              {data.necesidades.length === 0 ? (
+              {data.necesidadesPorCentro.length === 0 ? (
                 <p className="rounded-xl border bg-muted/40 px-4 py-8 text-center text-sm text-muted-foreground">
                   No hay necesidades abiertas en este momento. ¡Gracias por tu interés en
                   ayudar!
                 </p>
               ) : (
-                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {data.necesidades.map((n) => (
-                    <li key={n.id}>
-                      <DonanteNecesidadCard necesidad={n} />
+                <ul className="space-y-6">
+                  {data.necesidadesPorCentro.map((grupo) => (
+                    <li key={grupo.centro.id}>
+                      <DonanteCentroNecesidades grupo={grupo} />
                     </li>
                   ))}
                 </ul>
